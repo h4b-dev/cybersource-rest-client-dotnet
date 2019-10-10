@@ -24,7 +24,7 @@ namespace CyberSource.Interfaces
         /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
         /// <param name="groupName">Valid CyberSource Group Name. (optional)</param>
         /// <returns>ReportingV3NetFundingsGet200Response</returns>
-        ReportingV3NetFundingsGet200Response GetNetFundingInfo(DateTime? startTime, DateTime? endTime,
+        ReportingV3NetFundingsGet200Response GetNetFundingDetails(DateTime? startTime, DateTime? endTime,
             string organizationId = null, string groupName = null);
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace CyberSource.Interfaces
         /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
         /// <param name="groupName">Valid CyberSource Group Name. (optional)</param>
         /// <returns>ApiResponse of ReportingV3NetFundingsGet200Response</returns>
-        ApiResponse<ReportingV3NetFundingsGet200Response> GetNetFundingInfoWithHttpInfo(DateTime? startTime,
+        ApiResponse<ReportingV3NetFundingsGet200Response> GetNetFundingDetailsWithHttpInfo(DateTime? startTime,
             DateTime? endTime, string organizationId = null, string groupName = null);
 
         #endregion Synchronous Operations
@@ -58,7 +58,7 @@ namespace CyberSource.Interfaces
         /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
         /// <param name="groupName">Valid CyberSource Group Name. (optional)</param>
         /// <returns>Task of ReportingV3NetFundingsGet200Response</returns>
-        Task<ReportingV3NetFundingsGet200Response> GetNetFundingInfoAsync(DateTime? startTime,
+        Task<ReportingV3NetFundingsGet200Response> GetNetFundingDetailsAsync(DateTime? startTime,
             DateTime? endTime, string organizationId = null, string groupName = null);
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace CyberSource.Interfaces
         /// <param name="groupName">Valid CyberSource Group Name. (optional)</param>
         /// <returns>Task of ApiResponse (ReportingV3NetFundingsGet200Response)</returns>
         Task<ApiResponse<ReportingV3NetFundingsGet200Response>>
-            GetNetFundingInfoAsyncWithHttpInfo(DateTime? startTime, DateTime? endTime, string organizationId = null,
+            GetNetFundingDetailsAsyncWithHttpInfo(DateTime? startTime, DateTime? endTime, string organizationId = null,
                 string groupName = null);
 
         #endregion Asynchronous Operations

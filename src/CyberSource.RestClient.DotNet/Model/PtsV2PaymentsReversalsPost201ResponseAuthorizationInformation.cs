@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -150,21 +157,21 @@ namespace CyberSource.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // ApprovalCode (string) maxLength
-            if(this.ApprovalCode != null && this.ApprovalCode.Length > 6)
+            if(this.ApprovalCode != null && this.ApprovalCode.Length >= 6)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ApprovalCode, length must be less than 6.", new [] { "ApprovalCode" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ApprovalCode, length must be less than or equal to 6.", new [] { "ApprovalCode" });
             }
 
             // ReasonCode (string) maxLength
-            if(this.ReasonCode != null && this.ReasonCode.Length > 50)
+            if(this.ReasonCode != null && this.ReasonCode.Length >= 50)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ReasonCode, length must be less than 50.", new [] { "ReasonCode" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ReasonCode, length must be less than or equal to 50.", new [] { "ReasonCode" });
             }
 
             // ReversalSubmitted (string) maxLength
-            if(this.ReversalSubmitted != null && this.ReversalSubmitted.Length > 1)
+            if(this.ReversalSubmitted != null && this.ReversalSubmitted.Length >= 1)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ReversalSubmitted, length must be less than 1.", new [] { "ReversalSubmitted" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ReversalSubmitted, length must be less than or equal to 1.", new [] { "ReversalSubmitted" });
             }
 
             yield break;

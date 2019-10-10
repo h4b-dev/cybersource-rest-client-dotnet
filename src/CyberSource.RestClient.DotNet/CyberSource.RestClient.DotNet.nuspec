@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CyberSource.RestClient</id>
-    <version>0.1.2</version>
+    <version>0.1.3</version>
     <title>CyberSource.RestClient</title>
     <authors>CyberSource Corporation</authors>
     <owners>CyberSource</owners>

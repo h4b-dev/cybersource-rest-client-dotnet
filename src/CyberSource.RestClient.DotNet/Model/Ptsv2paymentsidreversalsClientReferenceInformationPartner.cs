@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -26,8 +33,8 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Ptsv2paymentsidreversalsClientReferenceInformationPartner" /> class.
         /// </summary>
-        /// <param name="DeveloperId">Identifier for the developer that helped integrate a partner solution to CyberSource.  Send this value in all requests that are sent through the partner solutions built by that developer. CyberSource assigns the ID to the developer.  Note When you see a developer ID of 999 in reports, the developer ID that was submitted is incorrect. .</param>
-        /// <param name="SolutionId">Identifier for the partner that is integrated to CyberSource.  Send this value in all requests that are sent through the partner solution. CyberSource assigns the ID to the partner.  Note When you see a partner ID of 999 in reports, the partner ID that was submitted is incorrect. .</param>
+        /// <param name="DeveloperId">Identifier for the developer that helped integrate a partner solution to CyberSource.  Send this value in all requests that are sent through the partner solutions built by that developer. CyberSource assigns the ID to the developer.  **Note** When you see a developer ID of 999 in reports, the developer ID that was submitted is incorrect. .</param>
+        /// <param name="SolutionId">Identifier for the partner that is integrated to CyberSource.  Send this value in all requests that are sent through the partner solution. CyberSource assigns the ID to the partner.  **Note** When you see a partner ID of 999 in reports, the partner ID that was submitted is incorrect. .</param>
         public Ptsv2paymentsidreversalsClientReferenceInformationPartner(string DeveloperId = default(string), string SolutionId = default(string))
         {
             this.DeveloperId = DeveloperId;
@@ -35,16 +42,16 @@ namespace CyberSource.Model
         }
         
         /// <summary>
-        /// Identifier for the developer that helped integrate a partner solution to CyberSource.  Send this value in all requests that are sent through the partner solutions built by that developer. CyberSource assigns the ID to the developer.  Note When you see a developer ID of 999 in reports, the developer ID that was submitted is incorrect. 
+        /// Identifier for the developer that helped integrate a partner solution to CyberSource.  Send this value in all requests that are sent through the partner solutions built by that developer. CyberSource assigns the ID to the developer.  **Note** When you see a developer ID of 999 in reports, the developer ID that was submitted is incorrect. 
         /// </summary>
-        /// <value>Identifier for the developer that helped integrate a partner solution to CyberSource.  Send this value in all requests that are sent through the partner solutions built by that developer. CyberSource assigns the ID to the developer.  Note When you see a developer ID of 999 in reports, the developer ID that was submitted is incorrect. </value>
+        /// <value>Identifier for the developer that helped integrate a partner solution to CyberSource.  Send this value in all requests that are sent through the partner solutions built by that developer. CyberSource assigns the ID to the developer.  **Note** When you see a developer ID of 999 in reports, the developer ID that was submitted is incorrect. </value>
         [DataMember(Name="developerId", EmitDefaultValue=false)]
         public string DeveloperId { get; set; }
 
         /// <summary>
-        /// Identifier for the partner that is integrated to CyberSource.  Send this value in all requests that are sent through the partner solution. CyberSource assigns the ID to the partner.  Note When you see a partner ID of 999 in reports, the partner ID that was submitted is incorrect. 
+        /// Identifier for the partner that is integrated to CyberSource.  Send this value in all requests that are sent through the partner solution. CyberSource assigns the ID to the partner.  **Note** When you see a partner ID of 999 in reports, the partner ID that was submitted is incorrect. 
         /// </summary>
-        /// <value>Identifier for the partner that is integrated to CyberSource.  Send this value in all requests that are sent through the partner solution. CyberSource assigns the ID to the partner.  Note When you see a partner ID of 999 in reports, the partner ID that was submitted is incorrect. </value>
+        /// <value>Identifier for the partner that is integrated to CyberSource.  Send this value in all requests that are sent through the partner solution. CyberSource assigns the ID to the partner.  **Note** When you see a partner ID of 999 in reports, the partner ID that was submitted is incorrect. </value>
         [DataMember(Name="solutionId", EmitDefaultValue=false)]
         public string SolutionId { get; set; }
 
@@ -133,15 +140,15 @@ namespace CyberSource.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // DeveloperId (string) maxLength
-            if(this.DeveloperId != null && this.DeveloperId.Length > 8)
+            if(this.DeveloperId != null && this.DeveloperId.Length >= 8)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DeveloperId, length must be less than 8.", new [] { "DeveloperId" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DeveloperId, length must be less than or equal to 8.", new [] { "DeveloperId" });
             }
 
             // SolutionId (string) maxLength
-            if(this.SolutionId != null && this.SolutionId.Length > 8)
+            if(this.SolutionId != null && this.SolutionId.Length >= 8)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolutionId, length must be less than 8.", new [] { "SolutionId" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for SolutionId, length must be less than or equal to 8.", new [] { "SolutionId" });
             }
 
             yield break;

@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,78 +9,36 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
     /// <summary>
-    /// TmsV1InstrumentidentifiersPost200Response
+    /// TmsV1InstrumentIdentifiersPost200Response
     /// </summary>
     [DataContract]
-    public partial class TmsV1InstrumentidentifiersPost200Response :  IEquatable<TmsV1InstrumentidentifiersPost200Response>, IValidatableObject
+    public partial class TmsV1InstrumentIdentifiersPost200Response :  IEquatable<TmsV1InstrumentIdentifiersPost200Response>, IValidatableObject
     {
         /// <summary>
-        /// Describes type of token. For example: customer, paymentInstrument or instrumentIdentifier.
-        /// </summary>
-        /// <value>Describes type of token. For example: customer, paymentInstrument or instrumentIdentifier.</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ObjectEnum
-        {
-            
-            /// <summary>
-            /// Enum InstrumentIdentifier for "instrumentIdentifier"
-            /// </summary>
-            [EnumMember(Value = "instrumentIdentifier")]
-            InstrumentIdentifier
-        }
-
-        /// <summary>
-        /// Current state of the token.
-        /// </summary>
-        /// <value>Current state of the token.</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum StateEnum
-        {
-            
-            /// <summary>
-            /// Enum ACTIVE for "ACTIVE"
-            /// </summary>
-            [EnumMember(Value = "ACTIVE")]
-            ACTIVE,
-            
-            /// <summary>
-            /// Enum CLOSED for "CLOSED"
-            /// </summary>
-            [EnumMember(Value = "CLOSED")]
-            CLOSED
-        }
-
-        /// <summary>
-        /// Describes type of token. For example: customer, paymentInstrument or instrumentIdentifier.
-        /// </summary>
-        /// <value>Describes type of token. For example: customer, paymentInstrument or instrumentIdentifier.</value>
-        [DataMember(Name="object", EmitDefaultValue=false)]
-        public ObjectEnum? _Object { get; set; }
-        /// <summary>
-        /// Current state of the token.
-        /// </summary>
-        /// <value>Current state of the token.</value>
-        [DataMember(Name="state", EmitDefaultValue=false)]
-        public StateEnum? State { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TmsV1InstrumentidentifiersPost200Response" /> class.
+        /// Initializes a new instance of the <see cref="TmsV1InstrumentIdentifiersPost200Response" /> class.
         /// </summary>
         /// <param name="Links">Links.</param>
         /// <param name="Card">Card.</param>
         /// <param name="BankAccount">BankAccount.</param>
         /// <param name="ProcessingInformation">ProcessingInformation.</param>
         /// <param name="Metadata">Metadata.</param>
-        public TmsV1InstrumentidentifiersPost200Response(Tmsv1instrumentidentifiersLinks Links = default(Tmsv1instrumentidentifiersLinks), Tmsv1instrumentidentifiersCard Card = default(Tmsv1instrumentidentifiersCard), Tmsv1instrumentidentifiersBankAccount BankAccount = default(Tmsv1instrumentidentifiersBankAccount), Tmsv1instrumentidentifiersProcessingInformation ProcessingInformation = default(Tmsv1instrumentidentifiersProcessingInformation), Tmsv1instrumentidentifiersMetadata Metadata = default(Tmsv1instrumentidentifiersMetadata))
+        public TmsV1InstrumentIdentifiersPost200Response(TmsV1InstrumentIdentifiersPost200ResponseLinks Links = default(TmsV1InstrumentIdentifiersPost200ResponseLinks), TmsV1InstrumentIdentifiersPost200ResponseCard Card = default(TmsV1InstrumentIdentifiersPost200ResponseCard), Tmsv1instrumentidentifiersBankAccount BankAccount = default(Tmsv1instrumentidentifiersBankAccount), TmsV1InstrumentIdentifiersPost200ResponseProcessingInformation ProcessingInformation = default(TmsV1InstrumentIdentifiersPost200ResponseProcessingInformation), TmsV1InstrumentIdentifiersPost200ResponseMetadata Metadata = default(TmsV1InstrumentIdentifiersPost200ResponseMetadata))
         {
             this.Links = Links;
             this.Card = Card;
@@ -93,7 +51,7 @@ namespace CyberSource.Model
         /// Gets or Sets Links
         /// </summary>
         [DataMember(Name="_links", EmitDefaultValue=false)]
-        public Tmsv1instrumentidentifiersLinks Links { get; set; }
+        public TmsV1InstrumentIdentifiersPost200ResponseLinks Links { get; set; }
 
         /// <summary>
         /// Unique identification number assigned by CyberSource to the submitted request.
@@ -102,13 +60,25 @@ namespace CyberSource.Model
         [DataMember(Name="id", EmitDefaultValue=false)]
         public string Id { get; private set; }
 
+        /// <summary>
+        /// &#39;Describes type of token.&#39;  Valid values: - instrumentIdentifier 
+        /// </summary>
+        /// <value>&#39;Describes type of token.&#39;  Valid values: - instrumentIdentifier </value>
+        [DataMember(Name="object", EmitDefaultValue=false)]
+        public string _Object { get; private set; }
 
+        /// <summary>
+        /// &#39;Current state of the token.&#39;  Valid values: - ACTIVE - CLOSED 
+        /// </summary>
+        /// <value>&#39;Current state of the token.&#39;  Valid values: - ACTIVE - CLOSED </value>
+        [DataMember(Name="state", EmitDefaultValue=false)]
+        public string State { get; private set; }
 
         /// <summary>
         /// Gets or Sets Card
         /// </summary>
         [DataMember(Name="card", EmitDefaultValue=false)]
-        public Tmsv1instrumentidentifiersCard Card { get; set; }
+        public TmsV1InstrumentIdentifiersPost200ResponseCard Card { get; set; }
 
         /// <summary>
         /// Gets or Sets BankAccount
@@ -120,13 +90,13 @@ namespace CyberSource.Model
         /// Gets or Sets ProcessingInformation
         /// </summary>
         [DataMember(Name="processingInformation", EmitDefaultValue=false)]
-        public Tmsv1instrumentidentifiersProcessingInformation ProcessingInformation { get; set; }
+        public TmsV1InstrumentIdentifiersPost200ResponseProcessingInformation ProcessingInformation { get; set; }
 
         /// <summary>
         /// Gets or Sets Metadata
         /// </summary>
         [DataMember(Name="metadata", EmitDefaultValue=false)]
-        public Tmsv1instrumentidentifiersMetadata Metadata { get; set; }
+        public TmsV1InstrumentIdentifiersPost200ResponseMetadata Metadata { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -135,7 +105,7 @@ namespace CyberSource.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class TmsV1InstrumentidentifiersPost200Response {\n");
+            sb.Append("class TmsV1InstrumentIdentifiersPost200Response {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  Id: ").Append(Id).Append("\n");
             sb.Append("  _Object: ").Append(_Object).Append("\n");
@@ -165,15 +135,15 @@ namespace CyberSource.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as TmsV1InstrumentidentifiersPost200Response);
+            return this.Equals(obj as TmsV1InstrumentIdentifiersPost200Response);
         }
 
         /// <summary>
-        /// Returns true if TmsV1InstrumentidentifiersPost200Response instances are equal
+        /// Returns true if TmsV1InstrumentIdentifiersPost200Response instances are equal
         /// </summary>
-        /// <param name="other">Instance of TmsV1InstrumentidentifiersPost200Response to be compared</param>
+        /// <param name="other">Instance of TmsV1InstrumentIdentifiersPost200Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TmsV1InstrumentidentifiersPost200Response other)
+        public bool Equals(TmsV1InstrumentIdentifiersPost200Response other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

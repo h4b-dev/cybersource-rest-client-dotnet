@@ -11,7 +11,7 @@
 
 using NUnit.Framework;
 
-namespace CyberSource.Test.Model
+namespace CyberSource.RestClient.DotNet.Test.Model
 {
     /// <summary>
     ///  Class for testing PtsV2PayoutsPostResponse

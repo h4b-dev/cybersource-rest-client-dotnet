@@ -137,9 +137,9 @@ namespace CyberSource.Api
         /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
         /// <param name="groupName">Valid CyberSource Group Name. (optional)</param>
         /// <returns>ReportingV3NetFundingsGet200Response</returns>
-        public ReportingV3NetFundingsGet200Response GetNetFundingInfo (DateTime? startTime, DateTime? endTime, string organizationId = null, string groupName = null)
+        public ReportingV3NetFundingsGet200Response GetNetFundingDetails (DateTime? startTime, DateTime? endTime, string organizationId = null, string groupName = null)
         {
-             ApiResponse<ReportingV3NetFundingsGet200Response> localVarResponse = GetNetFundingInfoWithHttpInfo(startTime, endTime, organizationId, groupName);
+             ApiResponse<ReportingV3NetFundingsGet200Response> localVarResponse = GetNetFundingDetailsWithHttpInfo(startTime, endTime, organizationId, groupName);
              return localVarResponse.Data;
         }
 
@@ -152,7 +152,7 @@ namespace CyberSource.Api
         /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
         /// <param name="groupName">Valid CyberSource Group Name. (optional)</param>
         /// <returns>ApiResponse of ReportingV3NetFundingsGet200Response</returns>
-        public ApiResponse< ReportingV3NetFundingsGet200Response > GetNetFundingInfoWithHttpInfo (DateTime? startTime, DateTime? endTime, string organizationId = null, string groupName = null)
+        public ApiResponse< ReportingV3NetFundingsGet200Response > GetNetFundingDetailsWithHttpInfo (DateTime? startTime, DateTime? endTime, string organizationId = null, string groupName = null)
         {
             // verify the required parameter 'startTime' is set
             if (startTime == null)
@@ -177,7 +177,8 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
-                "application/hal+json"
+                "application/hal+json",
+                "application/xml"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -198,7 +199,7 @@ namespace CyberSource.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetNetFundingInfo", localVarResponse);
+                Exception exception = ExceptionFactory("GetNetFundingDetails", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -216,9 +217,9 @@ namespace CyberSource.Api
         /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
         /// <param name="groupName">Valid CyberSource Group Name. (optional)</param>
         /// <returns>Task of ReportingV3NetFundingsGet200Response</returns>
-        public async Task<ReportingV3NetFundingsGet200Response> GetNetFundingInfoAsync (DateTime? startTime, DateTime? endTime, string organizationId = null, string groupName = null)
+        public async Task<ReportingV3NetFundingsGet200Response> GetNetFundingDetailsAsync (DateTime? startTime, DateTime? endTime, string organizationId = null, string groupName = null)
         {
-             ApiResponse<ReportingV3NetFundingsGet200Response> localVarResponse = await GetNetFundingInfoAsyncWithHttpInfo(startTime, endTime, organizationId, groupName);
+             ApiResponse<ReportingV3NetFundingsGet200Response> localVarResponse = await GetNetFundingDetailsAsyncWithHttpInfo(startTime, endTime, organizationId, groupName);
              return localVarResponse.Data;
 
         }
@@ -232,7 +233,7 @@ namespace CyberSource.Api
         /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
         /// <param name="groupName">Valid CyberSource Group Name. (optional)</param>
         /// <returns>Task of ApiResponse (ReportingV3NetFundingsGet200Response)</returns>
-        public async Task<ApiResponse<ReportingV3NetFundingsGet200Response>> GetNetFundingInfoAsyncWithHttpInfo (DateTime? startTime, DateTime? endTime, string organizationId = null, string groupName = null)
+        public async Task<ApiResponse<ReportingV3NetFundingsGet200Response>> GetNetFundingDetailsAsyncWithHttpInfo (DateTime? startTime, DateTime? endTime, string organizationId = null, string groupName = null)
         {
             // verify the required parameter 'startTime' is set
             if (startTime == null)
@@ -257,7 +258,8 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
-                "application/hal+json"
+                "application/hal+json",
+                "application/xml"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -278,7 +280,7 @@ namespace CyberSource.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetNetFundingInfo", localVarResponse);
+                Exception exception = ExceptionFactory("GetNetFundingDetails", localVarResponse);
                 if (exception != null) throw exception;
             }
 

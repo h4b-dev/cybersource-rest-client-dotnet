@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -31,13 +38,15 @@ namespace CyberSource.Model
         /// <param name="FluidData">FluidData.</param>
         /// <param name="Customer">Customer.</param>
         /// <param name="Bank">Bank.</param>
-        public Ptsv2paymentsPaymentInformation(Ptsv2paymentsPaymentInformationCard Card = default(Ptsv2paymentsPaymentInformationCard), Ptsv2paymentsPaymentInformationTokenizedCard TokenizedCard = default(Ptsv2paymentsPaymentInformationTokenizedCard), Ptsv2paymentsPaymentInformationFluidData FluidData = default(Ptsv2paymentsPaymentInformationFluidData), Ptsv2paymentsPaymentInformationCustomer Customer = default(Ptsv2paymentsPaymentInformationCustomer), Ptsv2paymentsPaymentInformationBank Bank = default(Ptsv2paymentsPaymentInformationBank))
+        /// <param name="PaymentType">PaymentType.</param>
+        public Ptsv2paymentsPaymentInformation(Ptsv2paymentsPaymentInformationCard Card = default(Ptsv2paymentsPaymentInformationCard), Ptsv2paymentsPaymentInformationTokenizedCard TokenizedCard = default(Ptsv2paymentsPaymentInformationTokenizedCard), Ptsv2paymentsPaymentInformationFluidData FluidData = default(Ptsv2paymentsPaymentInformationFluidData), Ptsv2paymentsPaymentInformationCustomer Customer = default(Ptsv2paymentsPaymentInformationCustomer), Ptsv2paymentsPaymentInformationBank Bank = default(Ptsv2paymentsPaymentInformationBank), Ptsv2paymentsPaymentInformationPaymentType PaymentType = default(Ptsv2paymentsPaymentInformationPaymentType))
         {
             this.Card = Card;
             this.TokenizedCard = TokenizedCard;
             this.FluidData = FluidData;
             this.Customer = Customer;
             this.Bank = Bank;
+            this.PaymentType = PaymentType;
         }
         
         /// <summary>
@@ -71,6 +80,12 @@ namespace CyberSource.Model
         public Ptsv2paymentsPaymentInformationBank Bank { get; set; }
 
         /// <summary>
+        /// Gets or Sets PaymentType
+        /// </summary>
+        [DataMember(Name="paymentType", EmitDefaultValue=false)]
+        public Ptsv2paymentsPaymentInformationPaymentType PaymentType { get; set; }
+
+        /// <summary>
         /// Returns the string presentation of the object
         /// </summary>
         /// <returns>String presentation of the object</returns>
@@ -83,6 +98,7 @@ namespace CyberSource.Model
             sb.Append("  FluidData: ").Append(FluidData).Append("\n");
             sb.Append("  Customer: ").Append(Customer).Append("\n");
             sb.Append("  Bank: ").Append(Bank).Append("\n");
+            sb.Append("  PaymentType: ").Append(PaymentType).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -143,6 +159,11 @@ namespace CyberSource.Model
                     this.Bank == other.Bank ||
                     this.Bank != null &&
                     this.Bank.Equals(other.Bank)
+                ) && 
+                (
+                    this.PaymentType == other.PaymentType ||
+                    this.PaymentType != null &&
+                    this.PaymentType.Equals(other.PaymentType)
                 );
         }
 
@@ -167,6 +188,8 @@ namespace CyberSource.Model
                     hash = hash * 59 + this.Customer.GetHashCode();
                 if (this.Bank != null)
                     hash = hash * 59 + this.Bank.GetHashCode();
+                if (this.PaymentType != null)
+                    hash = hash * 59 + this.PaymentType.GetHashCode();
                 return hash;
             }
         }

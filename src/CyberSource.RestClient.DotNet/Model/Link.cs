@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -26,36 +33,17 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Link" /> class.
         /// </summary>
-        /// <param name="Href">URI of the linked resource..</param>
-        /// <param name="Title">Label of the linked resource..</param>
-        /// <param name="Method">HTTP method of the linked resource..</param>
-        public Link(string Href = default(string), string Title = default(string), string Method = default(string))
+        /// <param name="Href">Href.</param>
+        public Link(string Href = default(string))
         {
             this.Href = Href;
-            this.Title = Title;
-            this.Method = Method;
         }
         
         /// <summary>
-        /// URI of the linked resource.
+        /// Gets or Sets Href
         /// </summary>
-        /// <value>URI of the linked resource.</value>
         [DataMember(Name="href", EmitDefaultValue=false)]
         public string Href { get; set; }
-
-        /// <summary>
-        /// Label of the linked resource.
-        /// </summary>
-        /// <value>Label of the linked resource.</value>
-        [DataMember(Name="title", EmitDefaultValue=false)]
-        public string Title { get; set; }
-
-        /// <summary>
-        /// HTTP method of the linked resource.
-        /// </summary>
-        /// <value>HTTP method of the linked resource.</value>
-        [DataMember(Name="method", EmitDefaultValue=false)]
-        public string Method { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -66,8 +54,6 @@ namespace CyberSource.Model
             var sb = new StringBuilder();
             sb.Append("class Link {\n");
             sb.Append("  Href: ").Append(Href).Append("\n");
-            sb.Append("  Title: ").Append(Title).Append("\n");
-            sb.Append("  Method: ").Append(Method).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -108,16 +94,6 @@ namespace CyberSource.Model
                     this.Href == other.Href ||
                     this.Href != null &&
                     this.Href.Equals(other.Href)
-                ) && 
-                (
-                    this.Title == other.Title ||
-                    this.Title != null &&
-                    this.Title.Equals(other.Title)
-                ) && 
-                (
-                    this.Method == other.Method ||
-                    this.Method != null &&
-                    this.Method.Equals(other.Method)
                 );
         }
 
@@ -134,10 +110,6 @@ namespace CyberSource.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.Href != null)
                     hash = hash * 59 + this.Href.GetHashCode();
-                if (this.Title != null)
-                    hash = hash * 59 + this.Title.GetHashCode();
-                if (this.Method != null)
-                    hash = hash * 59 + this.Method.GetHashCode();
                 return hash;
             }
         }

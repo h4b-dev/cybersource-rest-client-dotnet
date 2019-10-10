@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -26,16 +33,16 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="PtsV2PaymentsPost201ResponsePaymentInformationBankAccount" /> class.
         /// </summary>
-        /// <param name="CorrectedAccountNumber">Corrected account number from the ACH verification service, which is described in \&quot;ACH Verification,\&quot; page 25. .</param>
+        /// <param name="CorrectedAccountNumber">Corrected account number from the ACH verification service.  For details, see &#x60;ecp_debit_corrected_account_number&#x60; or &#x60;ecp_credit_corrected_account_number&#x60; field descriptions in [Electronic Check Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/EChecks_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm) .</param>
         public PtsV2PaymentsPost201ResponsePaymentInformationBankAccount(string CorrectedAccountNumber = default(string))
         {
             this.CorrectedAccountNumber = CorrectedAccountNumber;
         }
         
         /// <summary>
-        /// Corrected account number from the ACH verification service, which is described in \&quot;ACH Verification,\&quot; page 25. 
+        /// Corrected account number from the ACH verification service.  For details, see &#x60;ecp_debit_corrected_account_number&#x60; or &#x60;ecp_credit_corrected_account_number&#x60; field descriptions in [Electronic Check Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/EChecks_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm) 
         /// </summary>
-        /// <value>Corrected account number from the ACH verification service, which is described in \&quot;ACH Verification,\&quot; page 25. </value>
+        /// <value>Corrected account number from the ACH verification service.  For details, see &#x60;ecp_debit_corrected_account_number&#x60; or &#x60;ecp_credit_corrected_account_number&#x60; field descriptions in [Electronic Check Services Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/EChecks_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm) </value>
         [DataMember(Name="correctedAccountNumber", EmitDefaultValue=false)]
         public string CorrectedAccountNumber { get; set; }
 
@@ -116,9 +123,9 @@ namespace CyberSource.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // CorrectedAccountNumber (string) maxLength
-            if(this.CorrectedAccountNumber != null && this.CorrectedAccountNumber.Length > 17)
+            if(this.CorrectedAccountNumber != null && this.CorrectedAccountNumber.Length >= 17)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for CorrectedAccountNumber, length must be less than 17.", new [] { "CorrectedAccountNumber" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for CorrectedAccountNumber, length must be less than or equal to 17.", new [] { "CorrectedAccountNumber" });
             }
 
             yield break;

@@ -136,7 +136,7 @@ namespace CyberSource.Api
         /// <returns>TssV2TransactionsPost201Response</returns>
         public TssV2TransactionsPost201Response CreateSearch (TssV2TransactionsPostResponse createSearchRequest)
         {
-             ApiResponse<TssV2TransactionsPost201Response> localVarResponse = CreateSearchWithHttpInfo(createSearchRequest);
+            ApiResponse<TssV2TransactionsPost201Response> localVarResponse = CreateSearchWithHttpInfo(createSearchRequest);
              return localVarResponse.Data;
         }
 
@@ -281,11 +281,11 @@ namespace CyberSource.Api
         /// Get Search results Include the Search ID in the GET request to retrieve the search results.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Search ID.</param>
+        /// <param name="searchId">Search ID.</param>
         /// <returns>TssV2TransactionsPost201Response</returns>
-        public TssV2TransactionsPost201Response GetSearch (string id)
+        public TssV2TransactionsPost201Response GetSearch (string searchId)
         {
-             ApiResponse<TssV2TransactionsPost201Response> localVarResponse = GetSearchWithHttpInfo(id);
+             ApiResponse<TssV2TransactionsPost201Response> localVarResponse = GetSearchWithHttpInfo(searchId);
              return localVarResponse.Data;
         }
 
@@ -293,15 +293,15 @@ namespace CyberSource.Api
         /// Get Search results Include the Search ID in the GET request to retrieve the search results.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Search ID.</param>
+        /// <param name="searchId">Search ID.</param>
         /// <returns>ApiResponse of TssV2TransactionsPost201Response</returns>
-        public ApiResponse< TssV2TransactionsPost201Response > GetSearchWithHttpInfo (string id)
+        public ApiResponse< TssV2TransactionsPost201Response > GetSearchWithHttpInfo (string searchId)
         {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling SearchTransactionsApi->GetSearch");
+            // verify the required parameter 'searchId' is set
+            if (searchId == null)
+                throw new ApiException(400, "Missing required parameter 'searchId' when calling SearchTransactionsApi->GetSearch");
 
-            var localVarPath = $"/tss/v2/searches/{id}";
+            var localVarPath = $"/tss/v2/searches/{searchId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -317,13 +317,13 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
-
+                "*/*"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (id != null) localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (searchId != null) localVarPathParams.Add("searchId", Configuration.ApiClient.ParameterToString(searchId)); // path parameter
 
 
             // make the HTTP request
@@ -361,15 +361,15 @@ namespace CyberSource.Api
         /// Get Search results Include the Search ID in the GET request to retrieve the search results.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="id">Search ID.</param>
+        /// <param name="searchId">Search ID.</param>
         /// <returns>Task of ApiResponse (TssV2TransactionsPost201Response)</returns>
-        public async Task<ApiResponse<TssV2TransactionsPost201Response>> GetSearchAsyncWithHttpInfo (string id)
+        public async Task<ApiResponse<TssV2TransactionsPost201Response>> GetSearchAsyncWithHttpInfo (string searchId)
         {
-            // verify the required parameter 'id' is set
-            if (id == null)
-                throw new ApiException(400, "Missing required parameter 'id' when calling SearchTransactionsApi->GetSearch");
+            // verify the required parameter 'searchId' is set
+            if (searchId == null)
+                throw new ApiException(400, "Missing required parameter 'searchId' when calling SearchTransactionsApi->GetSearch");
 
-            var localVarPath = $"/tss/v2/searches/{id}";
+            var localVarPath = $"/tss/v2/searches/{searchId}";
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -385,13 +385,13 @@ namespace CyberSource.Api
 
             // to determine the Accept header
             String[] localVarHttpHeaderAccepts = new String[] {
-                "application/json;charset=utf-8"
+                "*/*"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (id != null) localVarPathParams.Add("id", Configuration.ApiClient.ParameterToString(id)); // path parameter
+            if (searchId != null) localVarPathParams.Add("searchId", Configuration.ApiClient.ParameterToString(searchId)); // path parameter
 
 
             // make the HTTP request

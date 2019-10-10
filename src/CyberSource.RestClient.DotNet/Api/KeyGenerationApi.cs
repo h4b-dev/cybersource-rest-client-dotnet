@@ -148,6 +148,9 @@ namespace CyberSource.Api
         /// <returns>ApiResponse of FlexV1KeysPost200Response</returns>
         public ApiResponse< FlexV1KeysPost200Response > GeneratePublicKeyWithHttpInfo (GeneratePublicKeyRequest generatePublicKeyRequest = null)
         {
+            // verify the required parameter 'generatePublicKeyRequest' is set
+            if (generatePublicKeyRequest == null)
+                throw new ApiException(400, "Missing required parameter 'generatePublicKeyRequest' when calling KeyGenerationApi->GeneratePublicKey");
 
             var localVarPath = $"/flex/v1/keys/";
             var localVarPathParams = new Dictionary<String, String>();
@@ -220,6 +223,9 @@ namespace CyberSource.Api
         /// <returns>Task of ApiResponse (FlexV1KeysPost200Response)</returns>
         public async Task<ApiResponse<FlexV1KeysPost200Response>> GeneratePublicKeyAsyncWithHttpInfo (GeneratePublicKeyRequest generatePublicKeyRequest = null)
         {
+            // verify the required parameter 'generatePublicKeyRequest' is set
+            if (generatePublicKeyRequest == null)
+                throw new ApiException(400, "Missing required parameter 'generatePublicKeyRequest' when calling KeyGenerationApi->GeneratePublicKey");
 
             var localVarPath = $"/flex/v1/keys/";
             var localVarPathParams = new Dictionary<String, String>();

@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,25 +9,32 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
     /// <summary>
-    /// TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst
+    /// TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst
     /// </summary>
     [DataContract]
-    public partial class TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst :  IEquatable<TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst>, IValidatableObject
+    public partial class TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst :  IEquatable<TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst>, IValidatableObject
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst" /> class.
+        /// Initializes a new instance of the <see cref="TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst" /> class.
         /// </summary>
         /// <param name="Href">A link to the collection starting at offset zero for the supplied limit..</param>
-        public TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst(string Href = default(string))
+        public TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst(string Href = default(string))
         {
             this.Href = Href;
         }
@@ -46,7 +53,7 @@ namespace CyberSource.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst {\n");
+            sb.Append("class TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst {\n");
             sb.Append("  Href: ").Append(Href).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
@@ -69,15 +76,15 @@ namespace CyberSource.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst);
+            return this.Equals(obj as TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst);
         }
 
         /// <summary>
-        /// Returns true if TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst instances are equal
+        /// Returns true if TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst instances are equal
         /// </summary>
-        /// <param name="other">Instance of TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst to be compared</param>
+        /// <param name="other">Instance of TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinksFirst other)
+        public bool Equals(TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinksFirst other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

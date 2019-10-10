@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -10,12 +10,17 @@
 
 using System;
 using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -26,73 +31,13 @@ namespace CyberSource.Model
     public partial class ReportingV3ReportSubscriptionsGet200ResponseSubscriptions :  IEquatable<ReportingV3ReportSubscriptionsGet200ResponseSubscriptions>, IValidatableObject
     {
         /// <summary>
-        /// Report Format
-        /// </summary>
-        /// <value>Report Format</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ReportMimeTypeEnum
-        {
-            
-            /// <summary>
-            /// Enum ApplicationXml for "application/xml"
-            /// </summary>
-            [EnumMember(Value = "application/xml")]
-            ApplicationXml,
-            
-            /// <summary>
-            /// Enum TextCsv for "text/csv"
-            /// </summary>
-            [EnumMember(Value = "text/csv")]
-            TextCsv
-        }
-
-        /// <summary>
-        /// Report Frequency
-        /// </summary>
-        /// <value>Report Frequency</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ReportFrequencyEnum
-        {
-            
-            /// <summary>
-            /// Enum DAILY for "DAILY"
-            /// </summary>
-            [EnumMember(Value = "DAILY")]
-            DAILY,
-            
-            /// <summary>
-            /// Enum WEEKLY for "WEEKLY"
-            /// </summary>
-            [EnumMember(Value = "WEEKLY")]
-            WEEKLY,
-            
-            /// <summary>
-            /// Enum MONTHLY for "MONTHLY"
-            /// </summary>
-            [EnumMember(Value = "MONTHLY")]
-            MONTHLY
-        }
-
-        /// <summary>
-        /// Report Format
-        /// </summary>
-        /// <value>Report Format</value>
-        [DataMember(Name="reportMimeType", EmitDefaultValue=false)]
-        public ReportMimeTypeEnum? ReportMimeType { get; set; }
-        /// <summary>
-        /// Report Frequency
-        /// </summary>
-        /// <value>Report Frequency</value>
-        [DataMember(Name="reportFrequency", EmitDefaultValue=false)]
-        public ReportFrequencyEnum? ReportFrequency { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="ReportingV3ReportSubscriptionsGet200ResponseSubscriptions" /> class.
         /// </summary>
         /// <param name="OrganizationId">Selected Organization Id.</param>
         /// <param name="ReportDefinitionId">Report Definition Id.</param>
         /// <param name="ReportDefinitionName">Report Definition Class.</param>
-        /// <param name="ReportMimeType">Report Format.</param>
-        /// <param name="ReportFrequency">Report Frequency.</param>
+        /// <param name="ReportMimeType">Report Format                          Valid values: - application/xml - text/csv .</param>
+        /// <param name="ReportFrequency">&#39;Report Frequency&#39;  Valid values: - DAILY - WEEKLY - MONTHLY - ADHOC .</param>
         /// <param name="ReportName">Report Name.</param>
         /// <param name="Timezone">Time Zone.</param>
         /// <param name="StartTime">Start Time.</param>
@@ -101,7 +46,7 @@ namespace CyberSource.Model
         /// <param name="ReportFilters">List of filters to apply.</param>
         /// <param name="ReportPreferences">ReportPreferences.</param>
         /// <param name="GroupId">Id for the selected group..</param>
-        public ReportingV3ReportSubscriptionsGet200ResponseSubscriptions(string OrganizationId = default(string), string ReportDefinitionId = default(string), string ReportDefinitionName = default(string), ReportMimeTypeEnum? ReportMimeType = default(ReportMimeTypeEnum?), ReportFrequencyEnum? ReportFrequency = default(ReportFrequencyEnum?), string ReportName = default(string), string Timezone = default(string), string StartTime = default(string), int? StartDay = default(int?), List<string> ReportFields = default(List<string>), Dictionary<string, List<string>> ReportFilters = default(Dictionary<string, List<string>>), ReportingV3ReportsIdGet200ResponseReportPreferences ReportPreferences = default(ReportingV3ReportsIdGet200ResponseReportPreferences), string GroupId = default(string))
+        public ReportingV3ReportSubscriptionsGet200ResponseSubscriptions(string OrganizationId = default(string), string ReportDefinitionId = default(string), string ReportDefinitionName = default(string), string ReportMimeType = default(string), string ReportFrequency = default(string), string ReportName = default(string), string Timezone = default(string), DateTime? StartTime = default(DateTime?), int? StartDay = default(int?), List<string> ReportFields = default(List<string>), Dictionary<string, List<string>> ReportFilters = default(Dictionary<string, List<string>>), Reportingv3reportsReportPreferences ReportPreferences = default(Reportingv3reportsReportPreferences), string GroupId = default(string))
         {
             this.OrganizationId = OrganizationId;
             this.ReportDefinitionId = ReportDefinitionId;
@@ -139,7 +84,19 @@ namespace CyberSource.Model
         [DataMember(Name="reportDefinitionName", EmitDefaultValue=false)]
         public string ReportDefinitionName { get; set; }
 
+        /// <summary>
+        /// Report Format                          Valid values: - application/xml - text/csv 
+        /// </summary>
+        /// <value>Report Format                          Valid values: - application/xml - text/csv </value>
+        [DataMember(Name="reportMimeType", EmitDefaultValue=false)]
+        public string ReportMimeType { get; set; }
 
+        /// <summary>
+        /// &#39;Report Frequency&#39;  Valid values: - DAILY - WEEKLY - MONTHLY - ADHOC 
+        /// </summary>
+        /// <value>&#39;Report Frequency&#39;  Valid values: - DAILY - WEEKLY - MONTHLY - ADHOC </value>
+        [DataMember(Name="reportFrequency", EmitDefaultValue=false)]
+        public string ReportFrequency { get; set; }
 
         /// <summary>
         /// Report Name
@@ -160,7 +117,7 @@ namespace CyberSource.Model
         /// </summary>
         /// <value>Start Time</value>
         [DataMember(Name="startTime", EmitDefaultValue=false)]
-        public string StartTime { get; set; }
+        public DateTime? StartTime { get; set; }
 
         /// <summary>
         /// Start Day
@@ -187,7 +144,7 @@ namespace CyberSource.Model
         /// Gets or Sets ReportPreferences
         /// </summary>
         [DataMember(Name="reportPreferences", EmitDefaultValue=false)]
-        public ReportingV3ReportsIdGet200ResponseReportPreferences ReportPreferences { get; set; }
+        public Reportingv3reportsReportPreferences ReportPreferences { get; set; }
 
         /// <summary>
         /// Id for the selected group.

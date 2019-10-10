@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -10,11 +10,17 @@
 
 using System;
 using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -32,7 +38,7 @@ namespace CyberSource.Model
         /// <param name="StoreAndForwardIndicator">When connectivity is unavailable, the client software that is installed on the POS terminal can store a transaction in its memory and send it for authorization when connectivity is restored. This value is provided by the client software that is installed on the POS terminal.  CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  Possible values: - Y: Transaction was stored and then forwarded. - N (default): Transaction was not stored and then forwarded.  This field is supported only on American Express Direct, FDC Nashville Global, and SIX. .</param>
         /// <param name="CardholderVerificationMethod">CardholderVerificationMethod.</param>
         /// <param name="TerminalInputCapability">TerminalInputCapability.</param>
-        /// <param name="TerminalSerialNumber">Terminal serial number assigned by the hardware manufacturer. This value is provided by the client software that is installed on the POS terminal.  CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  This field is supported only on American Express Direct, FDC Nashville Global, and SIX. .</param>
+        /// <param name="TerminalSerialNumber">Terminal serial number assigned by the hardware manufacturer. This value is provided by the client software that is installed on the POS terminal.  CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  This field is supported only on American Express Direct, FDC Nashville Global, and SIX.  For details, see the &#x60;terminal_serial_number&#x60; field description in [Card-Present Processing Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/Retail_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm) .</param>
         /// <param name="TerminalCardCaptureCapability">Indicates whether the terminal can capture the card.  Possible values: - 1: Terminal can capture card. - 0: Terminal cannot capture card.  This field is supported only on American Express Direct. .</param>
         /// <param name="TerminalOutputCapability">Indicates whether the terminal can print or display messages.  Possible values: - 1: Neither - 2: Print only - 3: Display only - 4: Print and display  This field is supported only on American Express Direct. .</param>
         /// <param name="TerminalPinCapability">Maximum PIN length that the terminal can capture.  Possible values: -  0: No PIN capture capability -  1: PIN capture capability unknown -  4: Four characters -  5: Five characters -  6: Six characters -  7: Seven characters -  8: Eight characters -  9: Nine characters - 10: Ten characters - 11: Eleven characters - 12: Twelve characters  This field is supported only on American Express Direct and SIX. .</param>
@@ -84,9 +90,9 @@ namespace CyberSource.Model
         public List<string> TerminalInputCapability { get; set; }
 
         /// <summary>
-        /// Terminal serial number assigned by the hardware manufacturer. This value is provided by the client software that is installed on the POS terminal.  CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  This field is supported only on American Express Direct, FDC Nashville Global, and SIX. 
+        /// Terminal serial number assigned by the hardware manufacturer. This value is provided by the client software that is installed on the POS terminal.  CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  This field is supported only on American Express Direct, FDC Nashville Global, and SIX.  For details, see the &#x60;terminal_serial_number&#x60; field description in [Card-Present Processing Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/Retail_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm) 
         /// </summary>
-        /// <value>Terminal serial number assigned by the hardware manufacturer. This value is provided by the client software that is installed on the POS terminal.  CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  This field is supported only on American Express Direct, FDC Nashville Global, and SIX. </value>
+        /// <value>Terminal serial number assigned by the hardware manufacturer. This value is provided by the client software that is installed on the POS terminal.  CyberSource does not forward this value to the processor. Instead, the value is forwarded to the CyberSource reporting functionality.  This field is supported only on American Express Direct, FDC Nashville Global, and SIX.  For details, see the &#x60;terminal_serial_number&#x60; field description in [Card-Present Processing Using the SCMP API.](https://apps.cybersource.com/library/documentation/dev_guides/Retail_SCMP_API/html/wwhelp/wwhimpl/js/html/wwhelp.htm) </value>
         [DataMember(Name="terminalSerialNumber", EmitDefaultValue=false)]
         public string TerminalSerialNumber { get; set; }
 
@@ -267,39 +273,39 @@ namespace CyberSource.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // PartnerSdkVersion (string) maxLength
-            if(this.PartnerSdkVersion != null && this.PartnerSdkVersion.Length > 32)
+            if(this.PartnerSdkVersion != null && this.PartnerSdkVersion.Length >= 32)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PartnerSdkVersion, length must be less than 32.", new [] { "PartnerSdkVersion" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for PartnerSdkVersion, length must be less than or equal to 32.", new [] { "PartnerSdkVersion" });
             }
 
             // StoreAndForwardIndicator (string) maxLength
-            if(this.StoreAndForwardIndicator != null && this.StoreAndForwardIndicator.Length > 1)
+            if(this.StoreAndForwardIndicator != null && this.StoreAndForwardIndicator.Length >= 1)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for StoreAndForwardIndicator, length must be less than 1.", new [] { "StoreAndForwardIndicator" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for StoreAndForwardIndicator, length must be less than or equal to 1.", new [] { "StoreAndForwardIndicator" });
             }
 
             // TerminalSerialNumber (string) maxLength
-            if(this.TerminalSerialNumber != null && this.TerminalSerialNumber.Length > 32)
+            if(this.TerminalSerialNumber != null && this.TerminalSerialNumber.Length >= 32)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TerminalSerialNumber, length must be less than 32.", new [] { "TerminalSerialNumber" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TerminalSerialNumber, length must be less than or equal to 32.", new [] { "TerminalSerialNumber" });
             }
 
             // TerminalCardCaptureCapability (string) maxLength
-            if(this.TerminalCardCaptureCapability != null && this.TerminalCardCaptureCapability.Length > 1)
+            if(this.TerminalCardCaptureCapability != null && this.TerminalCardCaptureCapability.Length >= 1)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TerminalCardCaptureCapability, length must be less than 1.", new [] { "TerminalCardCaptureCapability" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TerminalCardCaptureCapability, length must be less than or equal to 1.", new [] { "TerminalCardCaptureCapability" });
             }
 
             // TerminalOutputCapability (string) maxLength
-            if(this.TerminalOutputCapability != null && this.TerminalOutputCapability.Length > 1)
+            if(this.TerminalOutputCapability != null && this.TerminalOutputCapability.Length >= 1)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TerminalOutputCapability, length must be less than 1.", new [] { "TerminalOutputCapability" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for TerminalOutputCapability, length must be less than or equal to 1.", new [] { "TerminalOutputCapability" });
             }
 
             // DeviceId (string) maxLength
-            if(this.DeviceId != null && this.DeviceId.Length > 32)
+            if(this.DeviceId != null && this.DeviceId.Length >= 32)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DeviceId, length must be less than 32.", new [] { "DeviceId" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for DeviceId, length must be less than or equal to 32.", new [] { "DeviceId" });
             }
 
             yield break;

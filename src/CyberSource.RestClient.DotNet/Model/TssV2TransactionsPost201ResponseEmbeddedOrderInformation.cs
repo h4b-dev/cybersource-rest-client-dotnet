@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -29,7 +36,7 @@ namespace CyberSource.Model
         /// <param name="BillTo">BillTo.</param>
         /// <param name="ShipTo">ShipTo.</param>
         /// <param name="AmountDetails">AmountDetails.</param>
-        public TssV2TransactionsPost201ResponseEmbeddedOrderInformation(TssV2TransactionsPost201ResponseEmbeddedOrderInformationBillTo BillTo = default(TssV2TransactionsPost201ResponseEmbeddedOrderInformationBillTo), TssV2TransactionsPost201ResponseEmbeddedOrderInformationShipTo ShipTo = default(TssV2TransactionsPost201ResponseEmbeddedOrderInformationShipTo), TssV2TransactionsPost201ResponseEmbeddedOrderInformationAmountDetails AmountDetails = default(TssV2TransactionsPost201ResponseEmbeddedOrderInformationAmountDetails))
+        public TssV2TransactionsPost201ResponseEmbeddedOrderInformation(TssV2TransactionsPost201ResponseEmbeddedOrderInformationBillTo BillTo = default(TssV2TransactionsPost201ResponseEmbeddedOrderInformationBillTo), TssV2TransactionsPost201ResponseEmbeddedOrderInformationShipTo ShipTo = default(TssV2TransactionsPost201ResponseEmbeddedOrderInformationShipTo), Ptsv2paymentsidreversalsReversalInformationAmountDetails AmountDetails = default(Ptsv2paymentsidreversalsReversalInformationAmountDetails))
         {
             this.BillTo = BillTo;
             this.ShipTo = ShipTo;
@@ -52,7 +59,7 @@ namespace CyberSource.Model
         /// Gets or Sets AmountDetails
         /// </summary>
         [DataMember(Name="amountDetails", EmitDefaultValue=false)]
-        public TssV2TransactionsPost201ResponseEmbeddedOrderInformationAmountDetails AmountDetails { get; set; }
+        public Ptsv2paymentsidreversalsReversalInformationAmountDetails AmountDetails { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

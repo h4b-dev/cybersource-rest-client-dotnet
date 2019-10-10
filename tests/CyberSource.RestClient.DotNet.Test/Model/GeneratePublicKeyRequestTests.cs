@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -11,7 +11,7 @@
 
 using NUnit.Framework;
 
-namespace CyberSource.Test.Model
+namespace CyberSource.RestClient.DotNet.Test.Model
 {
     /// <summary>
     ///  Class for testing GeneratePublicKeyRequest
@@ -62,54 +62,6 @@ namespace CyberSource.Test.Model
         public void EncryptionTypeTest()
         {
             // TODO unit test for the property 'EncryptionType'
-        }
-        /// <summary>
-        /// Test the property 'TargetOrigin'
-        /// </summary>
-        [Test]
-        public void TargetOriginTest()
-        {
-            // TODO unit test for the property 'TargetOrigin'
-        }
-        /// <summary>
-        /// Test the property 'UnmaskedLeft'
-        /// </summary>
-        [Test]
-        public void UnmaskedLeftTest()
-        {
-            // TODO unit test for the property 'UnmaskedLeft'
-        }
-        /// <summary>
-        /// Test the property 'UnmaskedRight'
-        /// </summary>
-        [Test]
-        public void UnmaskedRightTest()
-        {
-            // TODO unit test for the property 'UnmaskedRight'
-        }
-        /// <summary>
-        /// Test the property 'EnableBillingAddress'
-        /// </summary>
-        [Test]
-        public void EnableBillingAddressTest()
-        {
-            // TODO unit test for the property 'EnableBillingAddress'
-        }
-        /// <summary>
-        /// Test the property 'Currency'
-        /// </summary>
-        [Test]
-        public void CurrencyTest()
-        {
-            // TODO unit test for the property 'Currency'
-        }
-        /// <summary>
-        /// Test the property 'EnableAutoAuth'
-        /// </summary>
-        [Test]
-        public void EnableAutoAuthTest()
-        {
-            // TODO unit test for the property 'EnableAutoAuth'
         }
 
     }

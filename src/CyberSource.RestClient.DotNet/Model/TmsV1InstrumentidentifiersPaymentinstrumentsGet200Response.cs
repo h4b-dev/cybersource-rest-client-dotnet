@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,48 +9,33 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
     /// <summary>
-    /// TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response
+    /// TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response
     /// </summary>
     [DataContract]
-    public partial class TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response :  IEquatable<TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response>, IValidatableObject
+    public partial class TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response :  IEquatable<TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response>, IValidatableObject
     {
         /// <summary>
-        /// Shows the response is a collection of objects.
-        /// </summary>
-        /// <value>Shows the response is a collection of objects.</value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ObjectEnum
-        {
-            
-            /// <summary>
-            /// Enum Collection for "collection"
-            /// </summary>
-            [EnumMember(Value = "collection")]
-            Collection
-        }
-
-        /// <summary>
-        /// Shows the response is a collection of objects.
-        /// </summary>
-        /// <value>Shows the response is a collection of objects.</value>
-        [DataMember(Name="object", EmitDefaultValue=false)]
-        public ObjectEnum? _Object { get; set; }
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response" /> class.
+        /// Initializes a new instance of the <see cref="TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response" /> class.
         /// </summary>
         /// <param name="Links">Links.</param>
-        /// <param name="Embedded">Array of Payment Instruments returned for the supplied Instrument Identifier..</param>
-        public TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response(TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinks Links = default(TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinks), Object Embedded = default(Object))
+        /// <param name="Embedded">Embedded.</param>
+        public TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response(TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinks Links = default(TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinks), TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseEmbedded Embedded = default(TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseEmbedded))
         {
             this.Links = Links;
             this.Embedded = Embedded;
@@ -60,8 +45,14 @@ namespace CyberSource.Model
         /// Gets or Sets Links
         /// </summary>
         [DataMember(Name="_links", EmitDefaultValue=false)]
-        public TmsV1InstrumentidentifiersPaymentinstrumentsGet200ResponseLinks Links { get; set; }
+        public TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseLinks Links { get; set; }
 
+        /// <summary>
+        /// &#39;Shows the response is a collection of objects.&#39;  Valid values: - collection 
+        /// </summary>
+        /// <value>&#39;Shows the response is a collection of objects.&#39;  Valid values: - collection </value>
+        [DataMember(Name="object", EmitDefaultValue=false)]
+        public string _Object { get; private set; }
 
         /// <summary>
         /// The offset parameter supplied in the request.
@@ -92,11 +83,10 @@ namespace CyberSource.Model
         public string Total { get; private set; }
 
         /// <summary>
-        /// Array of Payment Instruments returned for the supplied Instrument Identifier.
+        /// Gets or Sets Embedded
         /// </summary>
-        /// <value>Array of Payment Instruments returned for the supplied Instrument Identifier.</value>
         [DataMember(Name="_embedded", EmitDefaultValue=false)]
-        public Object Embedded { get; set; }
+        public TmsV1InstrumentIdentifiersPaymentInstrumentsGet200ResponseEmbedded Embedded { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -105,7 +95,7 @@ namespace CyberSource.Model
         public override string ToString()
         {
             var sb = new StringBuilder();
-            sb.Append("class TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response {\n");
+            sb.Append("class TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response {\n");
             sb.Append("  Links: ").Append(Links).Append("\n");
             sb.Append("  _Object: ").Append(_Object).Append("\n");
             sb.Append("  Offset: ").Append(Offset).Append("\n");
@@ -134,15 +124,15 @@ namespace CyberSource.Model
         public override bool Equals(object obj)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
-            return this.Equals(obj as TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response);
+            return this.Equals(obj as TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response);
         }
 
         /// <summary>
-        /// Returns true if TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response instances are equal
+        /// Returns true if TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response instances are equal
         /// </summary>
-        /// <param name="other">Instance of TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response to be compared</param>
+        /// <param name="other">Instance of TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response to be compared</param>
         /// <returns>Boolean</returns>
-        public bool Equals(TmsV1InstrumentidentifiersPaymentinstrumentsGet200Response other)
+        public bool Equals(TmsV1InstrumentIdentifiersPaymentInstrumentsGet200Response other)
         {
             // credit: http://stackoverflow.com/a/10454552/677735
             if (other == null)

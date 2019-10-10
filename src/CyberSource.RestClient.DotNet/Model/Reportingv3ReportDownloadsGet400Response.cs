@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -12,10 +12,15 @@ using System;
 using System.Linq;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -33,11 +38,11 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Reportingv3ReportDownloadsGet400Response" /> class.
         /// </summary>
-        /// <param name="SubmitTimeUtc">Time of request in UTC  (required).</param>
+        /// <param name="SubmitTimeUtc">Time of request in UTC.   (required).</param>
         /// <param name="Reason">Documented reason code  (required).</param>
         /// <param name="Message">Short descriptive message to the user.  (required).</param>
         /// <param name="Details">Error field list  (required).</param>
-        public Reportingv3ReportDownloadsGet400Response(string SubmitTimeUtc = default(string), string Reason = default(string), string Message = default(string), List<Reportingv3ReportDownloadsGet400ResponseDetails> Details = default(List<Reportingv3ReportDownloadsGet400ResponseDetails>))
+        public Reportingv3ReportDownloadsGet400Response(DateTime? SubmitTimeUtc = default(DateTime?), string Reason = default(string), string Message = default(string), List<Reportingv3ReportDownloadsGet400ResponseDetails> Details = default(List<Reportingv3ReportDownloadsGet400ResponseDetails>))
         {
             // to ensure "SubmitTimeUtc" is required (not null)
             if (SubmitTimeUtc == null)
@@ -78,11 +83,11 @@ namespace CyberSource.Model
         }
         
         /// <summary>
-        /// Time of request in UTC 
+        /// Time of request in UTC.  
         /// </summary>
-        /// <value>Time of request in UTC </value>
+        /// <value>Time of request in UTC.  </value>
         [DataMember(Name="submitTimeUtc", EmitDefaultValue=false)]
-        public string SubmitTimeUtc { get; set; }
+        public DateTime? SubmitTimeUtc { get; set; }
 
         /// <summary>
         /// Documented reason code 

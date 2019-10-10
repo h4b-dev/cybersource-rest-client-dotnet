@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -26,10 +33,23 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="KeyParameters" /> class.
         /// </summary>
-        /// <param name="EncryptionType">How the card number should be encrypted in the subsequent Tokenize Card request. Possible values are RsaOaep256 or None (if using this value the card number must be in plain text when included in the Tokenize Card request). The Tokenize Card request uses a secure connection (TLS 1.2+) regardless of what encryption type is specified..</param>
+        [JsonConstructorAttribute]
+        protected KeyParameters() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="KeyParameters" /> class.
+        /// </summary>
+        /// <param name="EncryptionType">How the card number should be encrypted in the subsequent Tokenize Card request. Possible values are RsaOaep256 or None (if using this value the card number must be in plain text when included in the Tokenize Card request). The Tokenize Card request uses a secure connection (TLS 1.2+) regardless of what encryption type is specified. (required).</param>
         public KeyParameters(string EncryptionType = default(string))
         {
-            this.EncryptionType = EncryptionType;
+            // to ensure "EncryptionType" is required (not null)
+            if (EncryptionType == null)
+            {
+                throw new InvalidDataException("EncryptionType is a required property for KeyParameters and cannot be null");
+            }
+            else
+            {
+                this.EncryptionType = EncryptionType;
+            }
         }
         
         /// <summary>

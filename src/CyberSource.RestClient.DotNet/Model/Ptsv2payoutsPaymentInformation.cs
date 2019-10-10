@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -27,9 +34,11 @@ namespace CyberSource.Model
         /// Initializes a new instance of the <see cref="Ptsv2payoutsPaymentInformation" /> class.
         /// </summary>
         /// <param name="Card">Card.</param>
-        public Ptsv2payoutsPaymentInformation(Ptsv2payoutsPaymentInformationCard Card = default(Ptsv2payoutsPaymentInformationCard))
+        /// <param name="Customer">Customer.</param>
+        public Ptsv2payoutsPaymentInformation(Ptsv2payoutsPaymentInformationCard Card = default(Ptsv2payoutsPaymentInformationCard), Ptsv2paymentsPaymentInformationCustomer Customer = default(Ptsv2paymentsPaymentInformationCustomer))
         {
             this.Card = Card;
+            this.Customer = Customer;
         }
         
         /// <summary>
@@ -37,6 +46,12 @@ namespace CyberSource.Model
         /// </summary>
         [DataMember(Name="card", EmitDefaultValue=false)]
         public Ptsv2payoutsPaymentInformationCard Card { get; set; }
+
+        /// <summary>
+        /// Gets or Sets Customer
+        /// </summary>
+        [DataMember(Name="customer", EmitDefaultValue=false)]
+        public Ptsv2paymentsPaymentInformationCustomer Customer { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -47,6 +62,7 @@ namespace CyberSource.Model
             var sb = new StringBuilder();
             sb.Append("class Ptsv2payoutsPaymentInformation {\n");
             sb.Append("  Card: ").Append(Card).Append("\n");
+            sb.Append("  Customer: ").Append(Customer).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -87,6 +103,11 @@ namespace CyberSource.Model
                     this.Card == other.Card ||
                     this.Card != null &&
                     this.Card.Equals(other.Card)
+                ) && 
+                (
+                    this.Customer == other.Customer ||
+                    this.Customer != null &&
+                    this.Customer.Equals(other.Customer)
                 );
         }
 
@@ -103,6 +124,8 @@ namespace CyberSource.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.Card != null)
                     hash = hash * 59 + this.Card.GetHashCode();
+                if (this.Customer != null)
+                    hash = hash * 59 + this.Customer.GetHashCode();
                 return hash;
             }
         }

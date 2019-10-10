@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -11,7 +11,7 @@
 
 using NUnit.Framework;
 
-namespace CyberSource.Test.Model
+namespace CyberSource.RestClient.DotNet.Test.Model
 {
     /// <summary>
     ///  Class for testing TssV2TransactionsGet200ResponsePaymentInformationPaymentType
@@ -64,28 +64,12 @@ namespace CyberSource.Test.Model
             // TODO unit test for the property 'Name'
         }
         /// <summary>
-        /// Test the property 'Type'
+        /// Test the property 'SubTypeName'
         /// </summary>
         [Test]
-        public void TypeTest()
+        public void SubTypeNameTest()
         {
-            // TODO unit test for the property 'Type'
-        }
-        /// <summary>
-        /// Test the property 'SubType'
-        /// </summary>
-        [Test]
-        public void SubTypeTest()
-        {
-            // TODO unit test for the property 'SubType'
-        }
-        /// <summary>
-        /// Test the property 'Method'
-        /// </summary>
-        [Test]
-        public void MethodTest()
-        {
-            // TODO unit test for the property 'Method'
+            // TODO unit test for the property 'SubTypeName'
         }
         /// <summary>
         /// Test the property 'FundingSource'
@@ -96,20 +80,20 @@ namespace CyberSource.Test.Model
             // TODO unit test for the property 'FundingSource'
         }
         /// <summary>
-        /// Test the property 'FundingSourceAffiliation'
+        /// Test the property 'Method'
         /// </summary>
         [Test]
-        public void FundingSourceAffiliationTest()
+        public void MethodTest()
         {
-            // TODO unit test for the property 'FundingSourceAffiliation'
+            // TODO unit test for the property 'Method'
         }
         /// <summary>
-        /// Test the property 'Credential'
+        /// Test the property 'AuthenticationMethod'
         /// </summary>
         [Test]
-        public void CredentialTest()
+        public void AuthenticationMethodTest()
         {
-            // TODO unit test for the property 'Credential'
+            // TODO unit test for the property 'AuthenticationMethod'
         }
 
     }

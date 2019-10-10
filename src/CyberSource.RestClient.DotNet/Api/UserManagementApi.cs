@@ -129,7 +129,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Get user based on organization Id, username, permission and role This endpoint is to get all the user information depending on the filter criteria passed in the query.
+        /// Get user information This endpoint is to get all the user information depending on the filter criteria passed in the query.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="organizationId">This is the orgId of the organization which the user belongs to. (optional)</param>
@@ -144,7 +144,7 @@ namespace CyberSource.Api
         }
 
         /// <summary>
-        /// Get user based on organization Id, username, permission and role This endpoint is to get all the user information depending on the filter criteria passed in the query.
+        /// Get user information This endpoint is to get all the user information depending on the filter criteria passed in the query.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="organizationId">This is the orgId of the organization which the user belongs to. (optional)</param>
@@ -170,8 +170,7 @@ namespace CyberSource.Api
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
-            };
+            String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"};
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
@@ -201,7 +200,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         }
 
         /// <summary>
-        /// Get user based on organization Id, username, permission and role This endpoint is to get all the user information depending on the filter criteria passed in the query.
+        /// Get user information This endpoint is to get all the user information depending on the filter criteria passed in the query.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="organizationId">This is the orgId of the organization which the user belongs to. (optional)</param>
@@ -217,7 +216,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         }
 
         /// <summary>
-        /// Get user based on organization Id, username, permission and role This endpoint is to get all the user information depending on the filter criteria passed in the query.
+        /// Get user information This endpoint is to get all the user information depending on the filter criteria passed in the query.
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="organizationId">This is the orgId of the organization which the user belongs to. (optional)</param>
@@ -243,8 +242,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
-            };
+            String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"};
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);

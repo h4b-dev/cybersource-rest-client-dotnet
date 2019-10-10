@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,12 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -25,38 +31,11 @@ namespace CyberSource.Model
     public partial class PtsV2PaymentsPost201ResponseErrorInformationDetails :  IEquatable<PtsV2PaymentsPost201ResponseErrorInformationDetails>, IValidatableObject
     {
         /// <summary>
-        /// Possible reasons for the error.  Possible values:  - MISSING_FIELD  - INVALID_DATA 
-        /// </summary>
-        /// <value>Possible reasons for the error.  Possible values:  - MISSING_FIELD  - INVALID_DATA </value>
-        [JsonConverter(typeof(StringEnumConverter))]
-        public enum ReasonEnum
-        {
-            
-            /// <summary>
-            /// Enum MISSINGFIELD for "MISSING_FIELD"
-            /// </summary>
-            [EnumMember(Value = "MISSING_FIELD")]
-            MISSINGFIELD,
-            
-            /// <summary>
-            /// Enum INVALIDDATA for "INVALID_DATA"
-            /// </summary>
-            [EnumMember(Value = "INVALID_DATA")]
-            INVALIDDATA
-        }
-
-        /// <summary>
-        /// Possible reasons for the error.  Possible values:  - MISSING_FIELD  - INVALID_DATA 
-        /// </summary>
-        /// <value>Possible reasons for the error.  Possible values:  - MISSING_FIELD  - INVALID_DATA </value>
-        [DataMember(Name="reason", EmitDefaultValue=false)]
-        public ReasonEnum? Reason { get; set; }
-        /// <summary>
         /// Initializes a new instance of the <see cref="PtsV2PaymentsPost201ResponseErrorInformationDetails" /> class.
         /// </summary>
         /// <param name="Field">This is the flattened JSON object field name/path that is either missing or invalid..</param>
         /// <param name="Reason">Possible reasons for the error.  Possible values:  - MISSING_FIELD  - INVALID_DATA .</param>
-        public PtsV2PaymentsPost201ResponseErrorInformationDetails(string Field = default(string), ReasonEnum? Reason = default(ReasonEnum?))
+        public PtsV2PaymentsPost201ResponseErrorInformationDetails(string Field = default(string), string Reason = default(string))
         {
             this.Field = Field;
             this.Reason = Reason;
@@ -69,6 +48,12 @@ namespace CyberSource.Model
         [DataMember(Name="field", EmitDefaultValue=false)]
         public string Field { get; set; }
 
+        /// <summary>
+        /// Possible reasons for the error.  Possible values:  - MISSING_FIELD  - INVALID_DATA 
+        /// </summary>
+        /// <value>Possible reasons for the error.  Possible values:  - MISSING_FIELD  - INVALID_DATA </value>
+        [DataMember(Name="reason", EmitDefaultValue=false)]
+        public string Reason { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object

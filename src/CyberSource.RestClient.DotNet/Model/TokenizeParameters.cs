@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -26,18 +33,31 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TokenizeParameters" /> class.
         /// </summary>
-        /// <param name="KeyId">Unique identifier for the generated token. This is obtained from the Generate Key request. See the [Java Script and Java examples] (http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_Flex/Key/html) on how to import the key and encrypt using the imported key..</param>
+        [JsonConstructorAttribute]
+        protected TokenizeParameters() { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TokenizeParameters" /> class.
+        /// </summary>
+        /// <param name="KeyId">Unique identifier for the generated token. This is obtained from the Generate Key request. See the [Java Script and Java examples](http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_Flex/Key/html) on how to import the key and encrypt using the imported key. (required).</param>
         /// <param name="CardInfo">CardInfo.</param>
         public TokenizeParameters(string KeyId = default(string), Flexv1tokensCardInfo CardInfo = default(Flexv1tokensCardInfo))
         {
-            this.KeyId = KeyId;
+            // to ensure "KeyId" is required (not null)
+            if (KeyId == null)
+            {
+                throw new InvalidDataException("KeyId is a required property for TokenizeParameters and cannot be null");
+            }
+            else
+            {
+                this.KeyId = KeyId;
+            }
             this.CardInfo = CardInfo;
         }
         
         /// <summary>
-        /// Unique identifier for the generated token. This is obtained from the Generate Key request. See the [Java Script and Java examples] (http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_Flex/Key/html) on how to import the key and encrypt using the imported key.
+        /// Unique identifier for the generated token. This is obtained from the Generate Key request. See the [Java Script and Java examples](http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_Flex/Key/html) on how to import the key and encrypt using the imported key.
         /// </summary>
-        /// <value>Unique identifier for the generated token. This is obtained from the Generate Key request. See the [Java Script and Java examples] (http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_Flex/Key/html) on how to import the key and encrypt using the imported key.</value>
+        /// <value>Unique identifier for the generated token. This is obtained from the Generate Key request. See the [Java Script and Java examples](http://apps.cybersource.com/library/documentation/dev_guides/Secure_Acceptance_Flex/Key/html) on how to import the key and encrypt using the imported key.</value>
         [DataMember(Name="keyId", EmitDefaultValue=false)]
         public string KeyId { get; set; }
 

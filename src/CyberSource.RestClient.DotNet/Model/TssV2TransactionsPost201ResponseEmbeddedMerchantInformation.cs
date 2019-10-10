@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -26,16 +33,16 @@ namespace CyberSource.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="TssV2TransactionsPost201ResponseEmbeddedMerchantInformation" /> class.
         /// </summary>
-        /// <param name="ResellerId">An unique identification number assigned by CyberSource to identify the submitted request..</param>
+        /// <param name="ResellerId">An unique identification number assigned by CyberSource to identify the submitted request. It is also appended to the endpoint of the resource..</param>
         public TssV2TransactionsPost201ResponseEmbeddedMerchantInformation(string ResellerId = default(string))
         {
             this.ResellerId = ResellerId;
         }
         
         /// <summary>
-        /// An unique identification number assigned by CyberSource to identify the submitted request.
+        /// An unique identification number assigned by CyberSource to identify the submitted request. It is also appended to the endpoint of the resource.
         /// </summary>
-        /// <value>An unique identification number assigned by CyberSource to identify the submitted request.</value>
+        /// <value>An unique identification number assigned by CyberSource to identify the submitted request. It is also appended to the endpoint of the resource.</value>
         [DataMember(Name="resellerId", EmitDefaultValue=false)]
         public string ResellerId { get; set; }
 
@@ -116,9 +123,9 @@ namespace CyberSource.Model
         IEnumerable<System.ComponentModel.DataAnnotations.ValidationResult> IValidatableObject.Validate(ValidationContext validationContext)
         {
             // ResellerId (string) maxLength
-            if(this.ResellerId != null && this.ResellerId.Length > 26)
+            if(this.ResellerId != null && this.ResellerId.Length >= 26)
             {
-                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ResellerId, length must be less than 26.", new [] { "ResellerId" });
+                yield return new System.ComponentModel.DataAnnotations.ValidationResult("Invalid value for ResellerId, length must be less than or equal to 26.", new [] { "ResellerId" });
             }
 
             yield break;

@@ -8,6 +8,7 @@
     <Copyright>Copyright © CyberSource 2019</Copyright>
     <Company>CyberSource Corporation</Company>
     <Authors>CyberSource</Authors>
+    <RootNamespace>CyberSource</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

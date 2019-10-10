@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -9,11 +9,18 @@
  */
 
 using System;
+using System.Linq;
+using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.ComponentModel.DataAnnotations;
+using SwaggerDateConverter = CyberSource.Client.SwaggerDateConverter;
 
 namespace CyberSource.Model
 {
@@ -27,9 +34,11 @@ namespace CyberSource.Model
         /// Initializes a new instance of the <see cref="VoidCreditRequest" /> class.
         /// </summary>
         /// <param name="ClientReferenceInformation">ClientReferenceInformation.</param>
-        public VoidCreditRequest(Ptsv2paymentsidreversalsClientReferenceInformation ClientReferenceInformation = default(Ptsv2paymentsidreversalsClientReferenceInformation))
+        /// <param name="PaymentInformation">PaymentInformation.</param>
+        public VoidCreditRequest(Ptsv2paymentsidreversalsClientReferenceInformation ClientReferenceInformation = default(Ptsv2paymentsidreversalsClientReferenceInformation), Ptsv2paymentsidvoidsPaymentInformation PaymentInformation = default(Ptsv2paymentsidvoidsPaymentInformation))
         {
             this.ClientReferenceInformation = ClientReferenceInformation;
+            this.PaymentInformation = PaymentInformation;
         }
         
         /// <summary>
@@ -37,6 +46,12 @@ namespace CyberSource.Model
         /// </summary>
         [DataMember(Name="clientReferenceInformation", EmitDefaultValue=false)]
         public Ptsv2paymentsidreversalsClientReferenceInformation ClientReferenceInformation { get; set; }
+
+        /// <summary>
+        /// Gets or Sets PaymentInformation
+        /// </summary>
+        [DataMember(Name="paymentInformation", EmitDefaultValue=false)]
+        public Ptsv2paymentsidvoidsPaymentInformation PaymentInformation { get; set; }
 
         /// <summary>
         /// Returns the string presentation of the object
@@ -47,6 +62,7 @@ namespace CyberSource.Model
             var sb = new StringBuilder();
             sb.Append("class VoidCreditRequest {\n");
             sb.Append("  ClientReferenceInformation: ").Append(ClientReferenceInformation).Append("\n");
+            sb.Append("  PaymentInformation: ").Append(PaymentInformation).Append("\n");
             sb.Append("}\n");
             return sb.ToString();
         }
@@ -87,6 +103,11 @@ namespace CyberSource.Model
                     this.ClientReferenceInformation == other.ClientReferenceInformation ||
                     this.ClientReferenceInformation != null &&
                     this.ClientReferenceInformation.Equals(other.ClientReferenceInformation)
+                ) && 
+                (
+                    this.PaymentInformation == other.PaymentInformation ||
+                    this.PaymentInformation != null &&
+                    this.PaymentInformation.Equals(other.PaymentInformation)
                 );
         }
 
@@ -103,6 +124,8 @@ namespace CyberSource.Model
                 // Suitable nullity checks etc, of course :)
                 if (this.ClientReferenceInformation != null)
                     hash = hash * 59 + this.ClientReferenceInformation.GetHashCode();
+                if (this.PaymentInformation != null)
+                    hash = hash * 59 + this.PaymentInformation.GetHashCode();
                 return hash;
             }
         }

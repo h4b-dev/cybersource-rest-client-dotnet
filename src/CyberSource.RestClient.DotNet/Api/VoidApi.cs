@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -11,7 +11,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using RestSharp;
 using CyberSource.Client;
 using CyberSource.Interfaces;
@@ -24,7 +23,7 @@ namespace CyberSource.Api
     /// </summary>
     public partial class VoidApi : IVoidApi
     {
-        private ExceptionFactory _exceptionFactory = (name, response) => null;
+        private CyberSource.Client.ExceptionFactory _exceptionFactory = (name, response) => null;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VoidApi"/> class.
@@ -32,14 +31,14 @@ namespace CyberSource.Api
         /// <returns></returns>
         public VoidApi(String basePath)
         {
-            Configuration = new Configuration(new ApiClient(basePath));
+            this.Configuration = new Configuration(new ApiClient(basePath));
 
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
+            ExceptionFactory = CyberSource.Client.Configuration.DefaultExceptionFactory;
 
             // ensure API client has configuration ready
             if (Configuration.ApiClient.Configuration == null)
             {
-                Configuration.ApiClient.Configuration = Configuration;
+                this.Configuration.ApiClient.Configuration = this.Configuration;
             }
         }
 
@@ -52,17 +51,13 @@ namespace CyberSource.Api
         public VoidApi(Configuration configuration = null)
         {
             if (configuration == null) // use the default one in Configuration
-                Configuration = Configuration.Default;
+                this.Configuration = Configuration.Default;
             else
-                Configuration = configuration;
+                this.Configuration = configuration;
 
-            ExceptionFactory = Configuration.DefaultExceptionFactory;
+            ExceptionFactory = CyberSource.Client.Configuration.DefaultExceptionFactory;
 
-            // ensure API client has configuration ready
-            if (Configuration.ApiClient.Configuration == null)
-            {
-                Configuration.ApiClient.Configuration = Configuration;
-            }
+            this.Configuration.ApiClient.Configuration = this.Configuration;
         }
 
         /// <summary>
@@ -71,7 +66,7 @@ namespace CyberSource.Api
         /// <value>The base path</value>
         public String GetBasePath()
         {
-            return Configuration.ApiClient.RestClient.BaseUrl.ToString();
+            return this.Configuration.ApiClient.RestClient.BaseUrl.ToString();
         }
 
         /// <summary>
@@ -93,7 +88,7 @@ namespace CyberSource.Api
         /// <summary>
         /// Provides a factory method hook for the creation of exceptions.
         /// </summary>
-        public ExceptionFactory ExceptionFactory
+        public CyberSource.Client.ExceptionFactory ExceptionFactory
         {
             get
             {
@@ -113,7 +108,7 @@ namespace CyberSource.Api
         [Obsolete("DefaultHeader is deprecated, please use Configuration.DefaultHeader instead.")]
         public Dictionary<String, String> DefaultHeader()
         {
-            return Configuration.DefaultHeader;
+            return this.Configuration.DefaultHeader;
         }
 
         /// <summary>
@@ -125,7 +120,7 @@ namespace CyberSource.Api
         [Obsolete("AddDefaultHeader is deprecated, please use Configuration.AddDefaultHeader instead.")]
         public void AddDefaultHeader(string key, string value)
         {
-            Configuration.AddDefaultHeader(key, value);
+            this.Configuration.AddDefaultHeader(key, value);
         }
 
         /// <summary>
@@ -172,7 +167,8 @@ namespace CyberSource.Api
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/hal+json;charset=utf-8"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -214,7 +210,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async Task<PtsV2PaymentsVoidsPost201Response> VoidCaptureAsync (VoidCaptureRequest voidCaptureRequest, string id)
+        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCaptureAsync (VoidCaptureRequest voidCaptureRequest, string id)
         {
              ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await VoidCaptureAsyncWithHttpInfo(voidCaptureRequest, id);
              return localVarResponse.Data;
@@ -228,7 +224,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         /// <param name="voidCaptureRequest"></param>
         /// <param name="id">The capture ID returned from a previous capture request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCaptureAsyncWithHttpInfo (VoidCaptureRequest voidCaptureRequest, string id)
+        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCaptureAsyncWithHttpInfo (VoidCaptureRequest voidCaptureRequest, string id)
         {
             // verify the required parameter 'voidCaptureRequest' is set
             if (voidCaptureRequest == null)
@@ -252,7 +248,8 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/hal+json;charset=utf-8"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -331,7 +328,8 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/hal+json;charset=utf-8"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -373,7 +371,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async Task<PtsV2PaymentsVoidsPost201Response> VoidCreditAsync (VoidCreditRequest voidCreditRequest, string id)
+        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidCreditAsync (VoidCreditRequest voidCreditRequest, string id)
         {
              ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await VoidCreditAsyncWithHttpInfo(voidCreditRequest, id);
              return localVarResponse.Data;
@@ -387,7 +385,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         /// <param name="voidCreditRequest"></param>
         /// <param name="id">The credit ID returned from a previous credit request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCreditAsyncWithHttpInfo (VoidCreditRequest voidCreditRequest, string id)
+        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidCreditAsyncWithHttpInfo (VoidCreditRequest voidCreditRequest, string id)
         {
             // verify the required parameter 'voidCreditRequest' is set
             if (voidCreditRequest == null)
@@ -411,7 +409,8 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/hal+json;charset=utf-8"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -490,7 +489,8 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/hal+json;charset=utf-8"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -532,7 +532,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async Task<PtsV2PaymentsVoidsPost201Response> VoidPaymentAsync (VoidPaymentRequest voidPaymentRequest, string id)
+        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidPaymentAsync (VoidPaymentRequest voidPaymentRequest, string id)
         {
              ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await VoidPaymentAsyncWithHttpInfo(voidPaymentRequest, id);
              return localVarResponse.Data;
@@ -546,7 +546,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         /// <param name="voidPaymentRequest"></param>
         /// <param name="id">The payment ID returned from a previous payment request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidPaymentAsyncWithHttpInfo (VoidPaymentRequest voidPaymentRequest, string id)
+        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidPaymentAsyncWithHttpInfo (VoidPaymentRequest voidPaymentRequest, string id)
         {
             // verify the required parameter 'voidPaymentRequest' is set
             if (voidPaymentRequest == null)
@@ -570,7 +570,8 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/hal+json;charset=utf-8"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -649,7 +650,8 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/hal+json;charset=utf-8"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -691,7 +693,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>Task of PtsV2PaymentsVoidsPost201Response</returns>
-        public async Task<PtsV2PaymentsVoidsPost201Response> VoidRefundAsync (VoidRefundRequest voidRefundRequest, string id)
+        public async System.Threading.Tasks.Task<PtsV2PaymentsVoidsPost201Response> VoidRefundAsync (VoidRefundRequest voidRefundRequest, string id)
         {
              ApiResponse<PtsV2PaymentsVoidsPost201Response> localVarResponse = await VoidRefundAsyncWithHttpInfo(voidRefundRequest, id);
              return localVarResponse.Data;
@@ -705,7 +707,7 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
         /// <param name="voidRefundRequest"></param>
         /// <param name="id">The refund ID returned from a previous refund request.</param>
         /// <returns>Task of ApiResponse (PtsV2PaymentsVoidsPost201Response)</returns>
-        public async Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidRefundAsyncWithHttpInfo (VoidRefundRequest voidRefundRequest, string id)
+        public async System.Threading.Tasks.Task<ApiResponse<PtsV2PaymentsVoidsPost201Response>> VoidRefundAsyncWithHttpInfo (VoidRefundRequest voidRefundRequest, string id)
         {
             // verify the required parameter 'voidRefundRequest' is set
             if (voidRefundRequest == null)
@@ -729,7 +731,8 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
             String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
 
             // to determine the Accept header
-String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset=utf-8"
+            String[] localVarHttpHeaderAccepts = new String[] {
+                "application/hal+json;charset=utf-8"
             };
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
@@ -766,4 +769,3 @@ String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json;charset
 
     }
 }
-

@@ -1,7 +1,7 @@
 /* 
- * CyberSource Flex API
+ * CyberSource Merged Spec
  *
- * Simple PAN tokenization service
+ * All CyberSource API specs merged together. These are available at https://developer.cybersource.com/api/reference/api-reference.html
  *
  * OpenAPI spec version: 0.0.1
  * 
@@ -11,7 +11,7 @@
 
 using NUnit.Framework;
 
-namespace CyberSource.Test.Model
+namespace CyberSource.RestClient.DotNet.Test.Model
 {
     /// <summary>
     ///  Class for testing Ptsv2paymentsidcapturesProcessingInformation
@@ -102,6 +102,14 @@ namespace CyberSource.Test.Model
         public void PurchaseLevelTest()
         {
             // TODO unit test for the property 'PurchaseLevel'
+        }
+        /// <summary>
+        /// Test the property 'IndustryDataType'
+        /// </summary>
+        [Test]
+        public void IndustryDataTypeTest()
+        {
+            // TODO unit test for the property 'IndustryDataType'
         }
         /// <summary>
         /// Test the property 'Issuer'

@@ -298,8 +298,7 @@ namespace CyberSource.Api
         /// <returns>ReportingV3ReportsIdGet200Response</returns>
         public ReportingV3ReportsIdGet200Response GetReportByReportId(string reportId, string organizationId = null)
         {
-            ApiResponse<ReportingV3ReportsIdGet200Response> localVarResponse =
-                GetReportByReportIdWithHttpInfo(reportId, organizationId);
+            ApiResponse<ReportingV3ReportsIdGet200Response> localVarResponse = GetReportByReportIdWithHttpInfo(reportId, organizationId);
             return localVarResponse.Data;
         }
 
@@ -308,15 +307,15 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
-        /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
+        /// <param name="organizationId">Valid CyberSource Organization Id (optional)</param>
         /// <returns>ApiResponse of ReportingV3ReportsIdGet200Response</returns>
-        public ApiResponse<ReportingV3ReportsIdGet200Response> GetReportByReportIdWithHttpInfo(string reportId,
-            string organizationId = null)
+        public ApiResponse<ReportingV3ReportsIdGet200Response> GetReportByReportIdWithHttpInfo(string reportId, string organizationId = null)
         {
             // verify the required parameter 'reportId' is set
             if (reportId == null)
-                throw new ApiException(400,
-                    "Missing required parameter 'reportId' when calling ReportsApi->GetReportByReportId");
+            {
+                throw new ApiException(400, "Missing required parameter 'reportId' when calling ReportsApi->GetReportByReportId");
+            }
 
             var localVarPath = $"/reporting/v3/reports/{reportId}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -375,13 +374,11 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
-        /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
+        /// <param name="organizationId">Valid CyberSource Organization Id (optional)</param>
         /// <returns>Task of ReportingV3ReportsIdGet200Response</returns>
-        public async Task<ReportingV3ReportsIdGet200Response> GetReportByReportIdAsync(
-            string reportId, string organizationId = null)
+        public async Task<ReportingV3ReportsIdGet200Response> GetReportByReportIdAsync(string reportId, string organizationId = null)
         {
-            ApiResponse<ReportingV3ReportsIdGet200Response> localVarResponse =
-                await GetReportByReportIdAsyncWithHttpInfo(reportId, organizationId);
+            ApiResponse<ReportingV3ReportsIdGet200Response> localVarResponse = await GetReportByReportIdAsyncWithHttpInfo(reportId, organizationId);
             return localVarResponse.Data;
         }
 
@@ -390,15 +387,15 @@ namespace CyberSource.Api
         /// </summary>
         /// <exception cref="CyberSource.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="reportId">Valid Report Id</param>
-        /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
+        /// <param name="organizationId">Valid CyberSource Organization Id (optional)</param>
         /// <returns>Task of ApiResponse (ReportingV3ReportsIdGet200Response)</returns>
-        public async Task<ApiResponse<ReportingV3ReportsIdGet200Response>>
-            GetReportByReportIdAsyncWithHttpInfo(string reportId, string organizationId = null)
+        public async Task<ApiResponse<ReportingV3ReportsIdGet200Response>> GetReportByReportIdAsyncWithHttpInfo(string reportId, string organizationId = null)
         {
             // verify the required parameter 'reportId' is set
             if (reportId == null)
-                throw new ApiException(400,
-                    "Missing required parameter 'reportId' when calling ReportsApi->GetReportByReportId");
+            {
+                throw new ApiException(400, "Missing required parameter 'reportId' when calling ReportsApi->GetReportByReportId");
+            }
 
             var localVarPath = $"/reporting/v3/reports/{reportId}";
             var localVarPathParams = new Dictionary<String, String>();
@@ -443,7 +440,7 @@ namespace CyberSource.Api
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("GetReportByReportId", localVarResponse);
+                Exception exception = ExceptionFactory("GetReportByReportIdAsync", localVarResponse);
                 if (exception != null) throw exception;
             }
 
@@ -460,7 +457,7 @@ namespace CyberSource.Api
         /// <param name="startTime">Valid report Start Time in **ISO 8601 format** Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14   **Example date format:**   - yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX </param>
         /// <param name="endTime">Valid report End Time in **ISO 8601 format** Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14   **Example date format:**   - yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX </param>
         /// <param name="timeQueryType">Specify time you would like to search</param>
-        /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
+        /// <param name="organizationId">Valid CyberSource Organization Id (optional)</param>
         /// <param name="reportMimeType">Valid Report Format (optional)</param>
         /// <param name="reportFrequency">Valid Report Frequency (optional)</param>
         /// <param name="reportName">Valid Report Name (optional)</param>
@@ -485,7 +482,7 @@ namespace CyberSource.Api
         /// <param name="startTime">Valid report Start Time in **ISO 8601 format** Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14   **Example date format:**   - yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX </param>
         /// <param name="endTime">Valid report End Time in **ISO 8601 format** Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14   **Example date format:**   - yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX </param>
         /// <param name="timeQueryType">Specify time you would like to search</param>
-        /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
+        /// <param name="organizationId">Valid CyberSource Organization Id (optional)</param>
         /// <param name="reportMimeType">Valid Report Format (optional)</param>
         /// <param name="reportFrequency">Valid Report Frequency (optional)</param>
         /// <param name="reportName">Valid Report Name (optional)</param>
@@ -499,16 +496,21 @@ namespace CyberSource.Api
         {
             // verify the required parameter 'startTime' is set
             if (startTime == null)
-                throw new ApiException(400,
-                    "Missing required parameter 'startTime' when calling ReportsApi->SearchReports");
+            {
+                throw new ApiException(400, "Missing required parameter 'startTime' when calling ReportsApi->SearchReports");
+            }
+
             // verify the required parameter 'endTime' is set
             if (endTime == null)
-                throw new ApiException(400,
-                    "Missing required parameter 'endTime' when calling ReportsApi->SearchReports");
+            {
+                throw new ApiException(400, "Missing required parameter 'endTime' when calling ReportsApi->SearchReports");
+            }
+
             // verify the required parameter 'timeQueryType' is set
             if (timeQueryType == null)
-                throw new ApiException(400,
-                    "Missing required parameter 'timeQueryType' when calling ReportsApi->SearchReports");
+            {
+                throw new ApiException(400, "Missing required parameter 'timeQueryType' when calling ReportsApi->SearchReports");
+            }
 
             var localVarPath = $"/reporting/v3/reports";
             if (!string.IsNullOrEmpty(organizationId))
@@ -540,28 +542,22 @@ namespace CyberSource.Api
             Object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[]
-            {
-                "application/json;charset=utf-8"
-            };
+            String[] localVarHttpContentTypes = new String[] {"application/json;charset=utf-8"};
             String localVarHttpContentType = "";
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[]
-            {
-                "application/hal+json"
-            };
+            String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json"};
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) Configuration.ApiClient.CallApi(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse)Configuration.ApiClient.CallApi(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
@@ -571,7 +567,7 @@ namespace CyberSource.Api
 
             return new ApiResponse<ReportingV3ReportsGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ReportingV3ReportsGet200Response) Configuration.ApiClient.Deserialize(localVarResponse,
+                (ReportingV3ReportsGet200Response)Configuration.ApiClient.Deserialize(localVarResponse,
                     typeof(ReportingV3ReportsGet200Response)));
         }
 
@@ -582,7 +578,7 @@ namespace CyberSource.Api
         /// <param name="startTime">Valid report Start Time in **ISO 8601 format** Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14   **Example date format:**   - yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX </param>
         /// <param name="endTime">Valid report End Time in **ISO 8601 format** Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14   **Example date format:**   - yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX </param>
         /// <param name="timeQueryType">Specify time you would like to search</param>
-        /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
+        /// <param name="organizationId">Valid CyberSource Organization Id (optional)</param>
         /// <param name="reportMimeType">Valid Report Format (optional)</param>
         /// <param name="reportFrequency">Valid Report Frequency (optional)</param>
         /// <param name="reportName">Valid Report Name (optional)</param>
@@ -607,7 +603,7 @@ namespace CyberSource.Api
         /// <param name="startTime">Valid report Start Time in **ISO 8601 format** Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14   **Example date format:**   - yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX </param>
         /// <param name="endTime">Valid report End Time in **ISO 8601 format** Please refer the following link to know more about ISO 8601 format. - https://xml2rfc.tools.ietf.org/public/rfc/html/rfc3339.html#anchor14   **Example date format:**   - yyyy-MM-dd&#39;T&#39;HH:mm:ssXXX </param>
         /// <param name="timeQueryType">Specify time you would like to search</param>
-        /// <param name="organizationId">Valid Cybersource Organization Id (optional)</param>
+        /// <param name="organizationId">Valid CyberSource Organization Id (optional)</param>
         /// <param name="reportMimeType">Valid Report Format (optional)</param>
         /// <param name="reportFrequency">Valid Report Frequency (optional)</param>
         /// <param name="reportName">Valid Report Name (optional)</param>
@@ -621,15 +617,45 @@ namespace CyberSource.Api
         {
             // verify the required parameter 'startTime' is set
             if (startTime == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'startTime' when calling ReportsApi->SearchReports");
+            }
+
             // verify the required parameter 'endTime' is set
             if (endTime == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'endTime' when calling ReportsApi->SearchReports");
+            }
+
             // verify the required parameter 'timeQueryType' is set
             if (timeQueryType == null)
+            {
                 throw new ApiException(400, "Missing required parameter 'timeQueryType' when calling ReportsApi->SearchReports");
+            }
 
             var localVarPath = $"/reporting/v3/reports";
+            if (!string.IsNullOrEmpty(organizationId))
+                localVarPath += $"?organizationId={organizationId}";
+
+            localVarPath += $"&startTime={startTime.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")}";
+            localVarPath += $"&endTime={endTime.Value.ToString("yyyy-MM-ddTHH:mm:ssZ")}";
+            localVarPath += $"&timeQueryType={timeQueryType}";
+
+            if (!string.IsNullOrEmpty(reportMimeType))
+                localVarPath += $"&reportMimeType={reportMimeType}";
+
+            if (!string.IsNullOrEmpty(reportFrequency))
+                localVarPath += $"&reportFrequency={reportFrequency}";
+
+            if (!string.IsNullOrEmpty(reportName))
+                localVarPath += $"&reportName={reportName}";
+
+            if (!string.IsNullOrEmpty(reportDefinitionId.ToString()))
+                localVarPath += $"&reportDefinitionId={reportDefinitionId}";
+
+            if (!string.IsNullOrEmpty(reportStatus))
+                localVarPath += $"&reportStatus={reportStatus}";
+
             var localVarPathParams = new Dictionary<String, String>();
             var localVarQueryParams = new Dictionary<String, String>();
             var localVarHeaderParams = new Dictionary<String, String>(Configuration.DefaultHeader);
@@ -638,66 +664,32 @@ namespace CyberSource.Api
             Object localVarPostBody = null;
 
             // to determine the Content-Type header
-            String[] localVarHttpContentTypes = new String[]
-            {
-                "application/json;charset=utf-8"
-            };
-            String localVarHttpContentType = Configuration.ApiClient.SelectHeaderContentType(localVarHttpContentTypes);
+            String[] localVarHttpContentTypes = new String[] {"application/json;charset=utf-8"};
+            String localVarHttpContentType = "";
 
             // to determine the Accept header
-            String[] localVarHttpHeaderAccepts = new String[]
-            {
-                "application/hal+json"
-            };
+            String[] localVarHttpHeaderAccepts = new String[] {"application/hal+json"};
             String localVarHttpHeaderAccept = Configuration.ApiClient.SelectHeaderAccept(localVarHttpHeaderAccepts);
             if (localVarHttpHeaderAccept != null)
                 localVarHeaderParams.Add("Accept", localVarHttpHeaderAccept);
 
-            if (organizationId != null)
-                localVarQueryParams.Add("organizationId",
-                    Configuration.ApiClient.ParameterToString(organizationId)); // query parameter
-            if (startTime != null)
-                localVarQueryParams.Add("startTime",
-                    Configuration.ApiClient.ParameterToString(startTime)); // query parameter
-            if (endTime != null)
-                localVarQueryParams.Add("endTime",
-                    Configuration.ApiClient.ParameterToString(endTime)); // query parameter
-            if (timeQueryType != null)
-                localVarQueryParams.Add("timeQueryType",
-                    Configuration.ApiClient.ParameterToString(timeQueryType)); // query parameter
-            if (reportMimeType != null)
-                localVarQueryParams.Add("reportMimeType",
-                    Configuration.ApiClient.ParameterToString(reportMimeType)); // query parameter
-            if (reportFrequency != null)
-                localVarQueryParams.Add("reportFrequency",
-                    Configuration.ApiClient.ParameterToString(reportFrequency)); // query parameter
-            if (reportName != null)
-                localVarQueryParams.Add("reportName",
-                    Configuration.ApiClient.ParameterToString(reportName)); // query parameter
-            if (reportDefinitionId != null)
-                localVarQueryParams.Add("reportDefinitionId",
-                    Configuration.ApiClient.ParameterToString(reportDefinitionId)); // query parameter
-            if (reportStatus != null)
-                localVarQueryParams.Add("reportStatus",
-                    Configuration.ApiClient.ParameterToString(reportStatus)); // query parameter
-            
             // make the HTTP request
-            IRestResponse localVarResponse = (IRestResponse) await Configuration.ApiClient.CallApiAsync(localVarPath,
+            IRestResponse localVarResponse = (IRestResponse)await Configuration.ApiClient.CallApiAsync(localVarPath,
                 Method.GET, localVarQueryParams, localVarPostBody, localVarHeaderParams, localVarFormParams,
                 localVarFileParams,
                 localVarPathParams, localVarHttpContentType);
 
-            int localVarStatusCode = (int) localVarResponse.StatusCode;
+            int localVarStatusCode = (int)localVarResponse.StatusCode;
 
             if (ExceptionFactory != null)
             {
-                Exception exception = ExceptionFactory("SearchReports", localVarResponse);
+                Exception exception = ExceptionFactory("SearchReportsAsync", localVarResponse);
                 if (exception != null) throw exception;
             }
 
             return new ApiResponse<ReportingV3ReportsGet200Response>(localVarStatusCode,
                 localVarResponse.Headers.ToDictionary(x => x.Name, x => x.Value.ToString()),
-                (ReportingV3ReportsGet200Response) Configuration.ApiClient.Deserialize(localVarResponse,
+                (ReportingV3ReportsGet200Response)Configuration.ApiClient.Deserialize(localVarResponse,
                     typeof(ReportingV3ReportsGet200Response)));
         }
     }

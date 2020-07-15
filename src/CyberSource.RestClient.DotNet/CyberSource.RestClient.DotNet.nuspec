@@ -10,6 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Use this client SDK to Call CyberSource REST API's. This SDK includes generates both HTTP Signature and JWT headers (including authentication headers) for the API requests.</description>
     <releaseNotes>Fixed release with updates for libraries and also resolve issues with dependencies.</releaseNotes>
+    <repository type="git" url="https://github.com/h4b-dev/cybersource-rest-client-dotnet.git" />    
     <dependencies>
       <group targetFramework="net461">
         <dependency id="CyberSource.Authentication" version="0.1.1"/>
